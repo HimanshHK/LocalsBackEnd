@@ -16,7 +16,7 @@ const Feeds = () => {
                 console.log(response)
                 setData(response.data)
             })
-    },[data])
+    },[])
 
     return(
       

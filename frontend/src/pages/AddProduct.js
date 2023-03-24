@@ -27,7 +27,7 @@ const AddProduct = () => {
 
     const handleSubmit = (event) => {
         setSubmitted(true)
-        return fetch('http://localhost:3001/data', {
+        return fetch('http://localhost:3001/product', {
             method: 'POST',
             body: JSON.stringify(inputs),
             headers: {

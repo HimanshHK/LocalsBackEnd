@@ -15,7 +15,7 @@ const SingleProductPage = () => {
   
   useEffect(() => {
     fetchSingleProduct(`${url}${id}`);
-    console.log('ha ha');
+    console.log(id);
   }, [id]);
 
   // useEffect(() => {
@@ -34,7 +34,7 @@ const SingleProductPage = () => {
     return <Error type='single-product' />;
   }
 
-  const { name, price, description, stock, stars, reviews, id: sku, company, image } = product;
+  const { name, price, description, stock, stars, reviews, _id: sku, company, image } = product;
 
   return (
       <Wrapper>

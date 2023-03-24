@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const User = require('../models/userSchema');
-// const bcrypt = require('bcryptjs');
-// import User from '../models/userSchema.js';
+
 
 router.post('/users', (req, res) => {
     const user = new User({

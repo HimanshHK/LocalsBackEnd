@@ -7,10 +7,12 @@ const app = express();
 const port = 3001 || process.env.PORT;
 // import userRoot from './controller/userRoot.js';
 const userRoutes = require('./controller/userRoutes.js');
+const productRoutes = require('./controller/productRoutes');
 // import productRoot from './controller/productRoot.js';
+const feedsRoutes = require('./controller/feedsRoute');
 
 //connect to mongodb
-mongoose.connect('mongodb://localhost:27017/ShopDB', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect('mongodb://0.0.0.0:27017/ShopDB', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on('connected', () => {
     console.log('Connected to database mongodb @ 27017');
 }
@@ -33,8 +35,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.use(userRoutes);
-
-
+app.use(productRoutes);
+app.use(feedsRoutes);
 app.listen(port, () => {
     console.log('Server started at port: ' + port);
 }

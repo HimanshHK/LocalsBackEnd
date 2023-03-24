@@ -4,11 +4,11 @@ import styled from 'styled-components'
 import { FaSearch } from 'react-icons/fa'
 import { Link } from 'react-router-dom'
 
-const Product = ({image, name, price, id}) => {
+const Product = ({image, name, price, _id}) => {
   return <Wrapper>
     <div className="container">
       <img src={image} alt={name} />
-      <Link to={`/products/${id}`} className="link">
+      <Link to={`/products/${_id}`} className="link">
         <FaSearch />
       </Link>
     </div>
