@@ -19,17 +19,10 @@ const Feeds = () => {
     },[])
 
     return(
-      
         <Wrapper>
             <div className='test1'><h1>What our User Says
             </h1></div>
             <div className="testimonial-box-container">
-            {/*{loading ? (*/}
-            {/*    <div>Loading...</div>*/}
-            {/*) : error ? (*/}
-            {/*    <div>{error}</div>*/}
-            {/*) : (*/}
-
                 { (
                 data.map((msg) => (
                         <div className="testimonial-box">
