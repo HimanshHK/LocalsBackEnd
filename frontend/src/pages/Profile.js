@@ -22,7 +22,8 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 export default function Dashboard() {
  
   const [data,setData]=useState([]);
-  
+  const user = localStorage.getItem('user')
+
   useEffect(()=>{
     axios.get('http://localhost:3001/orders')
         .then(response => {
@@ -63,10 +64,10 @@ export default function Dashboard() {
     </div>
      
     <div className='profile'>
-      <h3>Name  :  {localStorage.getItem("Name")}</h3>
-      <h5>Email :{localStorage.getItem("Email")}</h5>
+      <h3>Name  :  {user.name}</h3>
+      <h5>Email :{user.email}</h5>
       <h5>Phone :9991375659</h5>
-      <h5>Address :{localStorage.getItem("Address")}</h5>
+      <h5>Address :{user.address}</h5>
       </div>
     <div className="orders">
       {console.log(data)}

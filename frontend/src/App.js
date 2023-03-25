@@ -7,8 +7,10 @@ import SignInAdmin from './components/SignInAdmin';
 
 import { Home, SingleProduct, Cart, Checkout, Error, About, Products, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support ,Admin} from './pages';
 import AddProduct from "./pages/AddProduct";
+import {useState} from "react";
 
 function App() {
+  const [user,setUserState]= useState({});
   return (
     <div>
        <Router>
@@ -47,13 +49,13 @@ function App() {
           <Route exact path='/addproduct'>
             <AddProduct/>
           </Route>
-          <Route exact path='/login'>
-            <SignIn/>
+          <Route exact path='/login' >
+            <SignIn updatelogin={setUserState}/>
           </Route>
-          <Route exact path='/signin'>
+          <Route exact path='/signin' >
             <SignUp/>
           </Route>
-          <Route exact path='/profile'>
+          <Route exact path='/profile' user={user}>
             <Profile/>
           </Route>
           <Route exact path='/orders'>

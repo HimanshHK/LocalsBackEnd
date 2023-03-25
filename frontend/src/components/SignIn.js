@@ -39,7 +39,7 @@ const theme = createTheme();
 let userState={};
 //const {userState,changeUserstate}=useState({})
 
-export default function SignUp() {
+export default function SignUp(props) {
   const [inputs, setInputs] = useState({});
   const handleChange = (event) => {
     const name = event.target.name;
@@ -47,25 +47,26 @@ export default function SignUp() {
     setInputs((values) => ({ ...values, [name]: value }));
 };
 
-  const [data,setData]=useState([]);
+  const [data,setData]=useState();
   const [userState,changeUserstate]=useState([])
-    useEffect(()=>{
-        axios.get('http://localhost:3001/users')
-            .then(response => {
-                console.log(response)
-                setData(response.data)
-            })
-    },[])
+    // useEffect(()=>{
+    //     axios.get('http://localhost:3001/login')
+    //         .then(response => {
+    //             console.log(response)
+    //             setData(response.data)
+    //         })
+    // },[])
 
-    const [blocked,setBlocked]=useState([]);
-    useEffect(()=>{
-        axios.get('http://localhost:3001/blocked')
-            .then(response => {
-                console.log(response)
-                setBlocked(response.data)
 
-            })
-    },[])
+    // const [blocked,setBlocked]=useState([]);
+    // useEffect(()=>{
+    //     axios.get('http://localhost:3001/blocked')
+    //         .then(response => {
+    //             console.log(response)
+    //             setBlocked(response.data)
+    //
+    //         })
+    // },[])
 
     // useEffect(()=>{
     //   //add data in db.json
@@ -73,44 +74,69 @@ export default function SignUp() {
     //       .then(response => {
     //         console.log("Done!!")
     //       }
-    //   )      
+    //   )
     // },[userState])
    const history = useHistory();
   const handleSubmit = () => {
-    
-      for(let i=0;i<blocked.length;i++){
-            if(blocked[i].input===inputs.email){
-                alert('You are blocked')      
-                return
-            } 
-      }
-      
-      for(let i=0;i<data.length;i++){
-          
-          if(data[i].email===inputs.email){
-              
-              if(data[i].password===inputs.password){
-                localStorage.setItem('Name',data[i].name)
-                localStorage.setItem('Email',data[i].email)
-                localStorage.setItem('Address',data[i].address)
-                localStorage.setItem('Phone',data[i].phone)
-                localStorage.setItem('loggedIn',"true")
-                
-                alert("Logged In Successfully");
-                history.push('/profile')
-                return
-              }
-              else{
-                alert("Invalid Credentials");
-              }
+
+      // for(let i=0;i<blocked.length;i++){
+      //       if(blocked[i].input===inputs.email){
+      //           alert('You are blocked')
+      //           return
+      //       }
+      // }
+
+      // for(let i=0;i<data.length;i++){
+      //     if(data[i].email===inputs.email){
+      //         if(data[i].password===inputs.password){
+      //           localStorage.setItem('Name',data[i].name)
+      //           localStorage.setItem('Email',data[i].email)
+      //           localStorage.setItem('Address',data[i].address)
+      //           localStorage.setItem('Phone',data[i].phone)
+      //           localStorage.setItem('loggedIn',"true")
+      //           alert("Logged In Successfully");
+      //           history.push('/profile')
+      //           return
+      //         }
+      //         else{
+      //           alert("Invalid Credentials");
+      //         }
+      //     }
+      // }
+      // alert("Invalid Credentials");
+    // return fetch('http://localhost:3001/login', {
+    //   method: 'POST',
+    //   body: JSON.stringify(inputs),
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //   },
+    // }).then(res => {
+    //   console.log(res.data.loggedIn)
+    //   if (res.data.loggedIn == true) {
+    //     setData(res.data.user);
+    //     history.push('/products')
+    //   }
+    //   else
+    //      history.push('/products')
+    // }).then((data) => console.log(data));
+    //
+    // localStorage.setItem('testObject', JSON.stringify(data));
+    // history.push('/products')
+
+
+    axios.post("http://localhost:3001/login",inputs)
+        .then(res=>{
+          if(res.data.loggedIn==false){
+            history.push('/login');
           }
-          
-      }
-      alert("Invalid Credentials");
+          alert(res.data.user.name)
+          setData(res.data.user)
+          props.setUserState(res.data.user)
+        })
+    // history.push("/")})
+
+    history.push('/dashboard')
   }
-
-  
-
 
   return (
       <div className="login-root">

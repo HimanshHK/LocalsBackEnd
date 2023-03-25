@@ -13,6 +13,8 @@ const feedsRoutes = require('./controller/feedsRoute');
 
 //connect to mongodb
 mongoose.connect('mongodb://0.0.0.0:27017/ShopDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb+srv://himanshuhk:uV9qtrWrNYdcu0wW@shopdb.vcwnuof.mongodb.net/shopdb?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
+// mongoose.connect('mongodb+srv://himanshuhk2:wbdgroup37@shopdb.vcwnuof.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true, useUnifiedTopology: true });
 mongoose.connection.on('connected', () => {
     console.log('Connected to database mongodb @ 27017');
 }

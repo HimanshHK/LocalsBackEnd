@@ -30,6 +30,11 @@ const userSchema = new mongoose.Schema({
   orders:{
     type: Array,
     required: false,
+  },
+  access:{
+    type:Boolean,
+    default:true,
+    required:false,
   }
 });
 
