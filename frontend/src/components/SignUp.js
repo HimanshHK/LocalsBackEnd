@@ -44,11 +44,9 @@ export default function SignUp() {
   const {handleChange, values,errors,handleSubmit,valuesss} = useForm(formLogin);
   const [inputs, setInputs] = useState({});
 
-
   return (
       <div className="login-root">
         <div className="box-root flex-flex flex-direction--column fi"  >
-        {/*style="min-height: 100vh;flex-grow: 1;*/}
 
           <div className="box-root padding-top--24 flex-flex flex-direction--column fi1" >
             {/*style="flex-grow: 1; z-index: 9;"*/}
