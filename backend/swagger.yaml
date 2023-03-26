@@ -1,13 +1,13 @@
 swagger: "2.0"
 info:
   description: "This is Simple Shop Api for local-shopper"
-  version: "1.0.0"
+  version: "1.3.0"
   title: "Shop Api"
 tags:
 - name: "Feeds"
-  description: "FeedBack about service."
+  description: "Feedbacks from users."
 - name: "User"
-  description: "Everything about User Details"
+  description: "User Details provided by user."
 - name: "Product"
   description: "Product Details"
 
@@ -152,7 +152,7 @@ paths:
       "400":
         description: "Error performing the operation"
 # Product Routes
-  /products :
+  /product :
      post:
       tags:
       - "Product"
@@ -174,6 +174,7 @@ paths:
           description: "Successfully uploaded product"
         "403":
           description: "Error creating the product"
+  /products:
      get:
       tags:
       - "Product"  
@@ -189,7 +190,7 @@ paths:
         "400":
           description: "Error performing the operation"
 
-  /products/:id :
+  /products/{id} :
     get:
       tags:
       - "Product"
@@ -211,7 +212,41 @@ paths:
             $ref: "#/definitions/Product"
         "404":
           description: "Product not found"
-          
+  /orders:
+    get:
+      tags:
+      - "Order" 
+      summary: "Get all orders"
+      description: "Get all orders"
+      produces:
+      - "application/json"
+      responses:
+        "200":
+          description: "Successful operation"
+          schema:
+            $ref: "#/definitions/Product"
+        "400":
+          description: "Error performing the operation"
+    post:
+      tags:
+      - "Order"
+      summary: "post Orders"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "User object that needs to be added to the DB"
+        required: true
+        schema:
+          $ref: "#/definitions/Order"
+      responses:
+        "200":
+          description: "Successfully uploaded product"
+        "403":
+          description: "Error creating the product"
 definitions:
   User:
     type: "object"
@@ -299,6 +334,20 @@ definitions:
         example : 340
     xml:
       name: "Product" 
+  Order:
+    type: object
+    properties:
+       sellerEmail:
+          type: string
+          example: "mrsm492002@gmail.com"
+       buyerEmail:
+          type: string
+          example: "mrsm492002@gmail.com"
+       cartItems:
+          type: Array
+          example: []
+    xml:
+     name: "Order"
 externalDocs:
   description: "Find out more about Swagger"
   url: "http://swagger.io"
