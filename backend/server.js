@@ -5,9 +5,10 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const port = 3001 || process.env.PORT;
-const userRoutes = require("./routes/userRoutes.js");
+const adminRoutes = require("./routes/adminRoutes")
+const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
-const feedsRoutes = require("./routes/feedsRoute");
+const feedsRoutes = require("./routes/feedsRoutes");
 const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
@@ -55,6 +56,7 @@ app.use(bodyParser.json());
 app.use(express.static("public"));
 app.use("/uploads", express.static(path.join(__dirname, "../shared/uploads")));
 
+app.use(adminRoutes);
 app.use(userRoutes);
 app.use(productRoutes);
 app.use(feedsRoutes);

@@ -19,10 +19,8 @@ import "./Signup.css";
 import axios from "axios";
 import { useEffect } from "react";
 import Redux from "react-redux";
-//import { createGlobalState } from 'react-hooks-global-state';
 import { useHistory } from "react-router-dom";
-// const bcrypt = require('bcrypt');
-
+import { truncate } from "lodash";
 
 function Copyright(props) {
   return (
@@ -56,81 +54,49 @@ export default function SignIn() {
         : event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
-  const [data, setData] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:3001/users").then((response) => {
-      console.log(response);
-      setData(response.data);
-    });
-  }, []);
 
-  const [blocked, setBlocked] = useState([]);
-  useEffect(() => {
-    axios.get("http://localhost:3001/blocked").then((response) => {
-      console.log(response);
-      setBlocked(response.data);
-    });
-  }, []);
 
-  // useEffect(()=>{
-  //   //add data in db.json
-  //   axios.post('http://localhost:3001/login',{name:userState})
-  //       .then(response => {
-  //         console.log("Done!!")
-  //       }
-  //   )
-  // },[userState])
   const history = useHistory();
   const handleSubmit = (event) => {
-    event.preventDefault()
-    const username =inputs.email; 
+    event.preventDefault();
+    const username = inputs.email;
     const password = inputs.password;
-    console.log(username)
-    console.log(password)
+    console.log(username);
+    console.log(password);
 
-    fetch('http://localhost:3001/user', {
-      method: 'POST',
+    fetch("http://localhost:3001/user", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify({ username, password })
+      body: JSON.stringify({ username, password }),
     })
-    .then(response =>
-        console.log(response)
-      )
-    .catch(error => {
-      // Handle authentication error
-      console.log("Error in Authentication");
-    });
+      .then((response) => response.json())
+      .then((resData) => {
+        if(resData.user.blocked===true)
+        {
+          alert("You are Blocked")
+          history.push("/login");
+          return;
+        }
+        console.log(resData);
+          localStorage.setItem("Name", resData.user.name);
+          localStorage.setItem("Email", resData.user.email);
+          localStorage.setItem("Address", resData.user.address);
+          localStorage.setItem("Phone", resData.user.phone);
+          localStorage.setItem("ProfilePicUrl", `http://localhost:3001/${resData.user.profilePicUrl}`)
+          localStorage.setItem("loggedIn", "true");
 
+          alert("Logged In Successfully");
+          history.push("/profile");
+          return;
+      })
+      .catch((error) => {
+        // Handle authentication error
+        console.log(error.message);
+        console.log("Error in Authentication");
+      });
 
-
-    // for (let i = 0; i < blocked.length; i++) {
-    //   if (blocked[i].input === inputs.email) {
-    //     alert("You are blocked");
-    //     return;
-    //   }
-    // }
-
-    // for (let i = 0; i < data.length; i++) {
-    //   if (data[i].email === inputs.email) {
-    //     if (bcrypt.compare(data[i].password, inputs.password)) {
-    //       localStorage.setItem("Name", data[i].name);
-    //       localStorage.setItem("Email", data[i].email);
-    //       localStorage.setItem("Address", data[i].address);
-    //       localStorage.setItem("Phone", data[i].phone);
-    //       localStorage.setItem("ProfilePicUrl", `http://localhost:3001/${data[i].profilePicUrl}`)
-    //       localStorage.setItem("loggedIn", "true");
-
-    //       alert("Logged In Successfully");
-    //       history.push("/profile");
-    //       return;
-    //     } else {
-    //       alert("Invalid Credentials");
-    //     }
-    //   }
-    // }
-    // alert("Invalid Credentials");
   };
 
   return (

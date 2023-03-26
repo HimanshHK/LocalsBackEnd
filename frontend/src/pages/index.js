@@ -12,5 +12,7 @@ import Profile from './Profile';
 import Orders from './Orders';
 import Support from './Support';
 import Admin from './Admin';
+import ProfileAdmin from './ProfileAdmin';
+import SupportAdmin from './SupportAdmin';
 
-export { Home, Products, SingleProduct, About, Cart, Error, Checkout, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support,Admin };
+export { SupportAdmin,ProfileAdmin,Home, Products, SingleProduct, About, Cart, Error, Checkout, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support,Admin };

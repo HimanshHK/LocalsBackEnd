@@ -49,25 +49,25 @@ export default function SignUp() {
     setInputs((values) => ({ ...values, [name]: value }));
 };
 
-  const [data,setData]=useState([]);
-  const [userState,changeUserstate]=useState([])
-    useEffect(()=>{
-        axios.get('http://localhost:3001/users')
-            .then(response => {
-                console.log(response)
-                setData(response.data)
-            })
-    },[])
+  // const [data,setData]=useState([]);
+  // const [userState,changeUserstate]=useState([])
+  //   useEffect(()=>{
+  //       axios.get('http://localhost:3001/users')
+  //           .then(response => {
+  //               console.log(response)
+  //               setData(response.data)
+  //           })
+  //   },[])
 
-    const [blocked,setBloclked]=useState([]);
-    useEffect(()=>{
-        axios.get('http://localhost:3001/blocked')
-            .then(response => {
-                console.log(response)
-                setBloclked(response.data)
+    // const [blocked,setBloclked]=useState([]);
+    // useEffect(()=>{
+    //     axios.get('http://localhost:3001/blocked')
+    //         .then(response => {
+    //             console.log(response)
+    //             setBloclked(response.data)
 
-            })
-    },[])
+    //         })
+    // },[])
 
     // useEffect(()=>{
     //   //add data in db.json
@@ -77,9 +77,8 @@ export default function SignUp() {
     //       }
     //   )      
     // },[userState])
-    const history= useHistory();
+  const history= useHistory();
   const handleSubmit = () => {
-      
           
           if("shopper365@gmail.com"===inputs.email){
               if("Hk453@123#"===inputs.password){

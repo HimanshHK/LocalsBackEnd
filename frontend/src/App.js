@@ -5,7 +5,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignInAdmin from './components/SignInAdmin';
 
-import { Home, SingleProduct, Cart, Checkout, Error, About, Products, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support ,Admin} from './pages';
+import { SupportAdmin,Home, SingleProduct, Cart, Checkout, Error, About, Products, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support ,Admin,ProfileAdmin} from './pages';
 import AddProduct from "./pages/AddProduct";
 
 function App() {
@@ -56,11 +56,17 @@ function App() {
           <Route exact path='/profile'>
             <Profile/>
           </Route>
+          <Route exact path='/profileAdmin'>
+            <ProfileAdmin/>
+          </Route>
           <Route exact path='/orders'>
             <Orders/>
           </Route>
           <Route exact path='/support'>
             <Support/>
+          </Route>
+          <Route exact path='/supportAdmin'>
+            <SupportAdmin/>
           </Route>
           <Route exact path='/admin'>
             <Admin/>

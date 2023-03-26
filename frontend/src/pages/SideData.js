@@ -69,15 +69,35 @@ export const SideData = [
         icon:<PersonIcon/>,
         link:"/profile"
     },
-    // {
-    //     title:"Orders",
-    //     icon:<RedeemIcon/>,
-    //     link:"/orders"
-    // },
     {
         title:"Support",
         icon:<ReceiptIcon/>,
         link:"/support"
+    },
+    {
+        title:"Items",
+        icon:<CategoryIcon/>,
+        link:"/Items"
+    }
+]
+
+
+
+export const SideDataAdmin = [
+    {
+        title:"Home",
+        icon:<HomeIcon/>,
+        link:"/admin"
+    },
+    {
+        title:"Profile",
+        icon:<PersonIcon/>,
+        link:"/profileAdmin"
+    },
+    {
+        title:"Support",
+        icon:<ReceiptIcon/>,
+        link:"/supportAdmin"
     },
     {
         title:"Items",

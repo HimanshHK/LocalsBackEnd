@@ -36,8 +36,7 @@ const productSchema = new mongoose.Schema({
   },
   shipping: {
     type: Boolean,
-    required: false,
-    
+    default: false
   },
   seller:{
     type: String,
@@ -56,24 +55,6 @@ const productSchema = new mongoose.Schema({
     required:false,
   }
 });
-
-
-//add test data
-// const product = new Product({
-//   name: 'test',
-//   description: 'test',
-//   price: 100,
-//   image: 'test',
-//   company: 'test',
-//   category: 'test',
-//   shipping: true,
-//   seller: 'test',
-//   stock: 100,
-//   reviews: 100,
-//   stars: 100
-// });
-
-// product.save().then(() => console.log('product added'));
 
 const ProductModal = mongoose.model('Product', productSchema);
 

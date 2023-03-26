@@ -1,59 +1,57 @@
 const UserModal = require("../models/userModal");
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 
 // GET Methods
-exports.getUser = (req, res, next) => {
-  return UserModal.findOne({ username: username })
-    .then(user => {
-      if (!user) {
-        throw new Error('User not found');
-      }
-      return bcrypt.compare(password, user.password);
-    })
-    .then(match => {
-      if (!match) {
-        throw new Error('Invalid password');
-      }
-      return user;
-    })
-    .catch(err => {
-      throw err;
-    });
+exports.getUsers = (req, res, next) => {
+  return UserModal.find({ blocked: true }).then((user)=>{
+    console.log(user);
+    if(!user)
+    return res.status(401).json({ message: "No user exist"});
+    else
+    return res.status(200).json({ message: "Logged in", user: user })
+  })
+
+  // console.log(user)
 };
 
 // POST Methods
-exports.postUser = (req, res) => {
+exports.postUser = (req, res, next) => {
   console.log(req.body);
-  UserModal.findOne({ email: req.body.username })
-    .then(user => {
-      // return bcrypt.compare(password, req.body.password);
-      console.log(user);
-      res=bcrypt.compare(req.body.password, user.password)
-      console.log(res)
-      if (user) {
-        res=bcrypt.compare(req.body.password, user.password)
-        
-        if(res){
-          return user;
-        }
+  UserModal.findOne({ email: req.body.username }).then((user) => {
+    if (!user) {
+      return res.status(401).json({ message: "User does not exist" });
+    }
+
+    // return bcrypt.compare(password, req.body.password);
+    console.log(user);
+    bcrypt.compare(req.body.password, user.password).then((doMatch) => {
+      if (doMatch) {
+        return res.status(200).json({ message: "Logged in", user: user });
       }
-      else 
-      return null;
-    })
-    
+      return res.status(401).json({ message: "Invalid password" });
+    }).catch((err) => {
+      console.log(err);
+      return res.json({ message: err });
+    });
+  });
 };
 
-
-exports.postRegister = (req, res) => {
+exports.postRegister = (req, res, next) => {
   const user = new UserModal({
     name: req.body.name,
     password: req.body.password,
-    profilePicUrl: req.file?.path.toString().replace(/\\/g, "/").split("shared/").slice(1).join(""),
+    profilePicUrl: req.file?.path
+      .toString()
+      .replace(/\\/g, "/")
+      .split("shared/")
+      .slice(1)
+      .join(""),
     email: req.body.email,
     confirmPassword: req.body.confirmPassword,
     mobile: req.body.mobile,
     address: req.body.address,
     pincode: req.body.pincode,
+    blocked: false
   });
 
   user
@@ -63,6 +61,6 @@ exports.postRegister = (req, res) => {
       res.status(200).json(data);
     })
     .catch((err) => {
-      res.json({ message: err });
+      res.status(401).json({ message: err });
     });
 };
