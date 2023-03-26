@@ -84,6 +84,7 @@ export default function SignIn() {
           localStorage.setItem("Email", resData.user.email);
           localStorage.setItem("Address", resData.user.address);
           localStorage.setItem("Phone", resData.user.phone);
+          localStorage.setItem("Type", resData.user.type);
           localStorage.setItem("ProfilePicUrl", `http://localhost:3001/${resData.user.profilePicUrl}`)
           localStorage.setItem("loggedIn", "true");
 
@@ -155,11 +156,11 @@ export default function SignIn() {
                     <input type="submit" name="submit" value="Continue" />
                   </div>
                   <div>
-                    <Link href="/signin" variant="body2">
+                    <Link id="foot" href="/signin" variant="body2">
                       {"Don't have an account?"}
                     </Link>
                     <br />
-                    <Link href="/signadmin" variant="body2">
+                    <Link id="foot" href="/signadmin" variant="body2">
                       {"Sign In as Admin"}
                     </Link>
                   </div>

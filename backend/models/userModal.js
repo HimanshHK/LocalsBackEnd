@@ -38,6 +38,10 @@ const userSchema = new mongoose.Schema({
   blocked:{
     type: Boolean,
     required: true,
+  },
+  type:{
+    type: String,
+    required: true,
   }
 });
 

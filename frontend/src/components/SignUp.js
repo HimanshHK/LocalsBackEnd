@@ -65,7 +65,7 @@ export default function SignUp() {
           <div className="formbg-outer">
             <div className="formbg">
               <div className="formbg-inner padding-horizontal--48">
-                <span className="padding-bottom--15">Register an account</span>
+                {/* <span className="padding-bottom--15">Register an account</span> */}
 
                 <form id="stripe-login" onSubmit={handleSubmit}>
                   <div className="field padding-bottom--24">
@@ -100,22 +100,24 @@ export default function SignUp() {
                   <div
                     className="field padding-bottom--24"
                     onChange={handleChange}
+                    style = {{display:"flex"}}
                   >
                     <input
                       type="radio"
                       id="html"
-                      name="fav_language"
+                      name="type"
                       value="Seller"
+                      
                     />
-                    <label>Seller</label>
+                    <label className ="radioLabel">Seller</label>
                     <br />
                     <input
                       type="radio"
                       id="css"
-                      name="fav_language"
+                      name="type"
                       value="Buyer"
                     />
-                    <label>Buyer</label>
+                    <label className ="radioLabel">Buyer</label>
                   </div>
 
                   <div
@@ -130,7 +132,7 @@ export default function SignUp() {
                     <div className="grid--50-50">
                       <label htmlFor="password">Password</label>
                       <div className="reset-pass">
-                        <a href="#">Forgot your password?</a>
+                        {/* <a href="#">Forgot your password?</a> */}
                       </div>
                     </div>
                     <input
@@ -147,7 +149,7 @@ export default function SignUp() {
                       <label htmlFor="password">Confirm Password</label>
                     </div>
                     <input
-                      type="confirmPassword"
+                      type="password"
                       name="confirmPassword"
                       onChange={handleChange}
                     />

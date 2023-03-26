@@ -30,41 +30,33 @@ export default function Dashboard() {
       setData(response.data);
     });
 
-    let email="himanshuhkcoding@gmail.com"
-    let seller=[]
-    seller[0]=0
-    for(let i=0;i<data.length;i++){
-      if(data[i].sellerEmail===email){
-        seller[0]=1; //he is seller
-      }else if(data[i].buyerEmail===email){
-        seller[0]=2; //he is buyer
-      }
-    }
-    let arrFinal=[seller,[]]
-    console.log(seller)
-    if(seller[0]===1){
-      let arr=[]
-      for(let i=0;i<data.length;i++){
-        if(data[i].sellerEmail===email){
-          arr.push(data[i])
-        }
-      }
-      arrFinal=[seller,arr]
-      setOrders(arrFinal)
-    }else if(seller[0]===2){
-      let arr=[]
+
+    let email=localStorage.getItem("Email")
+    let type=localStorage.getItem("Type")
+    let company=localStorage.getItem("Name")
+    console.log(email)
+    console.log(type)
+    let arr=[]
+    if(type==="Buyer"){
       for(let i=0;i<data.length;i++){
         if(data[i].buyerEmail===email){
-          arr.push(data[i])
+          arr.push(data[i].cartItems)
         }
       }
-      
-      arrFinal=[seller,arr]
+      let arrFinal=[type,arr]
       setOrders(arrFinal)
-    }else
-    setOrders(arrFinal)
-
-    console.log(orders)
+    }
+    else{
+      for(let i=0;i<data.length;i++){
+        for(let j=0;j<data[i].cartItems.length;j++){
+          if(data[i].cartItems[j].company===company){
+            arr.push(data[i].cartItems[j])
+          }
+        }
+      }
+      let arrFinal=[type,arr]
+      setOrders(arrFinal)
+    }
   }
 
 
@@ -72,10 +64,11 @@ export default function Dashboard() {
     <div className="divid">
       <div className="sidebar">
         <div className="image">
-          <div className="img">
+          <div className="imghk">
             <img
-              src={localStorage.getItem("ProfilePicUrl")}
+              src={localStorage.getItem("ProfilePicUrl")}  
               alt="Profile Pic"
+              className="imghk"
             />
           </div>
           <div className="top-heading">

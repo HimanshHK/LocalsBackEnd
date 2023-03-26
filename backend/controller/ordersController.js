@@ -33,11 +33,10 @@ exports.postOrders = (req, res) => {
 
   const orders = new OrdersModal({
     buyerEmail: req.body[0].buyerEmail,
-    sellerEmail: req.body[0].sellerEmail,
     cartItems: arr,
   });
 
-  console.log(orders)
+//   console.log(orders)
 
   orders.save().then((result) =>
       res

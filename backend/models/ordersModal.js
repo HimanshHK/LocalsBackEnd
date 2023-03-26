@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 const ordersSchema = new mongoose.Schema({
-  sellerEmail: {
-    type: String,
-    required: true,
-  },
   buyerEmail: {
     type: String,
     required: true,

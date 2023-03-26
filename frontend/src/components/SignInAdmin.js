@@ -139,11 +139,11 @@ export default function SignUp() {
                       <input type="submit" name="submit" value="Continue"/>
                     </div>
                     <div>
-                    <Link href="/signin" variant="body2">
+                    <Link id="foot" href="/signin" variant="body2">
                            {"Don't have an account?"}
                     </Link>
                     <br/>
-                    <Link href="/signadmin" variant="body2">
+                    <Link id="foot" href="/signadmin" variant="body2">
                            {"Sign In as Admin"}
                     </Link>
                     </div>

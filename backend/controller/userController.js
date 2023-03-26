@@ -37,6 +37,7 @@ exports.postUser = (req, res, next) => {
 };
 
 exports.postRegister = (req, res, next) => {
+  console.log(req.body);
   const user = new UserModal({
     name: req.body.name,
     password: req.body.password,
@@ -51,7 +52,8 @@ exports.postRegister = (req, res, next) => {
     mobile: req.body.mobile,
     address: req.body.address,
     pincode: req.body.pincode,
-    blocked: false
+    blocked: false,
+    type: req.body.type,
   });
 
   user

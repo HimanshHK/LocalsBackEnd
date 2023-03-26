@@ -14,9 +14,10 @@ const CartTotals = () => {
         console.log(token);
     }
 
-      let userName={buyerEmail:"himanshuhkcoding@gmail.com",sellerEmail:"himanshuhkofficial@gmail.com"}
+      // console.log(cart);
+      let userName={buyerEmail:localStorage.getItem("Name")}
       const inputs = [userName,...cart];
-      console.log();
+      // console.log();
       
       const setOrder = () => { 
         return fetch('http://localhost:3001/orders', {
