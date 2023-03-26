@@ -4,6 +4,7 @@ const ProductModal = require("../models/productModal");
 exports.getProducts = (req, res) => {
   ProductModal.find()
     .then((data) => {
+      // console.log(data)
       res.json(data);
     })
     .catch((err) => {

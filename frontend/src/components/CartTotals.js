@@ -14,7 +14,7 @@ const CartTotals = () => {
         console.log(token);
     }
 
-      let userName={buyerName:"himanshu",sellerName:"kataria"}
+      let userName={buyerEmail:"himanshuhkcoding@gmail.com",sellerEmail:"himanshuhkofficial@gmail.com"}
       const inputs = [userName,...cart];
       console.log();
       

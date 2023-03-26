@@ -9,6 +9,7 @@ const adminRoutes = require("./routes/adminRoutes")
 const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoutes");
 const feedsRoutes = require("./routes/feedsRoutes");
+const ordersRoutes = require("./routes/ordersRoutes");
 const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
@@ -60,6 +61,7 @@ app.use(adminRoutes);
 app.use(userRoutes);
 app.use(productRoutes);
 app.use(feedsRoutes);
+app.use(ordersRoutes);
 
 app.listen(port, () => {
   console.log("Server started at port: " + port);

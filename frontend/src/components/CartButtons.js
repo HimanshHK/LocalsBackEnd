@@ -11,7 +11,6 @@ import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { Button } from "@mui/material";
-// import Modal from './login/Modal'
 
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
@@ -31,22 +30,6 @@ const CartButtons = () => {
           <span className="cart-value">{total_items}</span>
         </span>
       </Link>
-      {/* {myUser ? (
-            <button
-                type="button"
-                className="auth-btn"
-                onClick={() => {
-                  clearCart();
-                  logout({ returnTo: window.location.origin });
-                }}
-            >
-              Logout <FaUserMinus />
-            </button>
-        ) : (
-            <button type="button" className="auth-btn">
-              Login <FaUserPlus />
-            </button>
-        )} */}
       <div className="new">
         {localStorage.getItem("loggedIn") === null ? (
           <Link to="/login" className="cart-btn">

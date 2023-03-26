@@ -18,13 +18,7 @@ const SingleProductPage = () => {
     console.log(id);
   }, [id]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     setTimeout(() => {
-  //       history.push('/');
-  //     }, 3000);
-  //   } 
-  // }, [error]);
+
 
   if (loading) {
     return <Loading />;
