@@ -4,11 +4,7 @@ const feedController = require("../controller/feedController");
 const Feeds = require("../models/feedsModal.js");
 
 // GET Routes
-router.get("/feeds",[
-    check('id').notEmpty(),
-    check('mail').isEmail(),
-    check('msg').notEmpty(),
-  ], feedController.getFeeds);
+router.get("/feeds", feedController.getFeeds);
 
 // POST Routes
 router.post("/feeds",[

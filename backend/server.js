@@ -13,6 +13,30 @@ const ordersRoutes = require("./routes/ordersRoutes");
 const morgan = require("morgan");
 const fs = require("fs");
 const path = require("path");
+const swaggerDoc = require('swagger-jsdoc')
+const swaggerUi = require('swagger-ui-express')
+const YAML = require('yamljs');
+
+
+const options = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Shop API',
+            version: '1.3.0',
+            description: 'A simple Express Shop API',
+        },
+        servers: [  
+            {
+                url: 'http://localhost:3001',
+            },
+        ],
+    },
+    apis: ['./controller/*.js'],
+};
+
+const swaggerjsdoc =   YAML.load('./swagger.yaml')
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerjsdoc))
 
 //connect to mongodb
 mongoose.connect("mongodb://0.0.0.0:27017/ShopDB", {

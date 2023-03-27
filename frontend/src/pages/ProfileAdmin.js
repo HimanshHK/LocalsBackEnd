@@ -20,13 +20,7 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 
 
 export default function ProfileAdmin() {  
-//   useEffect(()=>{
-//     axios.get('http://localhost:3001/orders')
-//         .then(response => {
-//             console.log(response)
-//             setData(response.data)
-//         })
-//    },[])
+
   return (
     <div className="divid">
     <div className="sidebar">
@@ -55,11 +49,11 @@ export default function ProfileAdmin() {
         })}
       </ul>
       <div className="boxer">
-        <div id="pro">UPGRADE TO PRO</div>
+        <div id="pro" >UPGRADE TO PRO</div>
       </div>
     </div>
      
-    <div className='profile'>
+    <div className='orders'>
       <h3>Name  : Admin </h3>
       <h5>Email :shopper365@gmail.com</h5>
       <h5>Phone :9991375659</h5>

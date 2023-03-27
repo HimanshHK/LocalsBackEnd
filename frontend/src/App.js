@@ -15,22 +15,6 @@ function App() {
         
         <Navbar />
           <Sidebar />
-          {/* <Routes>
-            <Route exact path='/' element={< Home />}></Route>
-            <Route exact path='/about' element={< About />}></Route>
-            <Route exact path='/cart' element={< Cart />}></Route>
-            <Route exact path='/products' element={< Products />}></Route>
-            <Route exact path='/addproduct' element={< AddProduct />}></Route>
-            <Route exact path='/login' element={< SignIn />}></Route>
-            <Route exact path='/signin' element={< SignUp />}></Route>  
-            <Route exact path='/products/:id' element={< SingleProduct />}></Route>     
-            <Route exact path='/checkout' element={< Checkout />}></Route>
-            <Route exact path='*' element={< Error />}></Route>
-
-
-
-        </Routes> */} 
-
         <Switch>
           <Route exact path='/'>
             <Home />

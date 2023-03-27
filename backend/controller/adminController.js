@@ -1,5 +1,9 @@
 const UserModal = require("../models/userModal");
 
+//GET Route
+
+
+//POST Route
 exports.postBlockUser = (req, res, next) => {
     UserModal.findOne({email: req.body.email}).then((user) => {
         if (!user) {

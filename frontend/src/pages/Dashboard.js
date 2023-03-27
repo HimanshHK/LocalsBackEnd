@@ -1,64 +1,53 @@
 import React, { useEffect, useState } from "react";
-// import { FaBeer, FaWindows } from "react-icons/fa";
 import "./Dashboard.css";
 import { SideData } from "./SideData";
-// import { Link } from "react-router-dom";
-// import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import axios from "axios";
-
-// import Box from "@mui/material/Box";
-import Card from "./Card";
-// import CardContent from "@mui/material/CardContent";
-// import CardMedia from "@mui/material/CardMedia";
-// import IconButton from "@mui/material/IconButton";
-// import Typography from "@mui/material/Typography";
-// import SkipPreviousIcon from "@mui/icons-material/SkipPrevious";
-// import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-// import SkipNextIcon from "@mui/icons-material/SkipNext";
-// import { CardActionArea } from "@mui/material";
-// import { validateYupSchema } from "formik";
-// import {userState} from '../components/index.js'
+import CardColumns from "./CardColumns";
 
 export default function Dashboard() {
   const [data, setData] = useState([]);
   const [state, setState] = useState("");
   const [orders, setOrders] = useState([]);
 
+  // useEffect(() => {
+
+  // }, []);
+
   function loadData() {
-
-    axios.get("http://localhost:3001/orders").then((response) => {
-      setData(response.data);
-    });
-
-
-    let email=localStorage.getItem("Email")
-    let type=localStorage.getItem("Type")
-    let company=localStorage.getItem("Name")
-    console.log(email)
-    console.log(type)
-    let arr=[]
-    if(type==="Buyer"){
-      for(let i=0;i<data.length;i++){
-        if(data[i].buyerEmail===email){
-          arr.push(data[i].cartItems)
-        }
-      }
-      let arrFinal=[type,arr]
-      setOrders(arrFinal)
-    }
-    else{
-      for(let i=0;i<data.length;i++){
-        for(let j=0;j<data[i].cartItems.length;j++){
-          if(data[i].cartItems[j].company===company){
-            arr.push(data[i].cartItems[j])
+    axios
+      .get("http://localhost:3001/orders")
+      .then((response) => {
+        setData(response.data);
+        return response.data;
+      })
+      .then((resData) => {
+        const email = localStorage.getItem("Email");
+        const type = localStorage.getItem("Type");
+        const company = localStorage.getItem("Name");
+        const items = [];
+        if (type === "Buyer") {
+          for (let i = 0; i < resData.length; i++) {
+            if (resData[i].buyerEmail === email) {
+              items.push(resData[i].cartItems);
+            }
           }
+          const arrFinal = [type, items];
+          setOrders(arrFinal);
+        } else {
+          for (let i = 0; i < resData.length; i++) {
+            for (let j = 0; j < resData[i].cartItems.length; j++) {
+              if (resData[i].cartItems[j].company === company) {
+                items.push(resData[i].cartItems[j]);
+              }
+            }
+          }
+          const arrFinal = [type, items];
+          setOrders(arrFinal);
         }
-      }
-      let arrFinal=[type,arr]
-      setOrders(arrFinal)
-    }
+        console.log(orders);
+      })
+      .catch((err) => console.log(err));
   }
-
 
   return (
     <div className="divid">
@@ -66,8 +55,8 @@ export default function Dashboard() {
         <div className="image">
           <div className="imghk">
             <img
-              src={localStorage.getItem("ProfilePicUrl")}  
-              alt="Profile Pic"
+              src={localStorage.getItem("ProfilePicUrl")}
+              alt="Profile Pic"  
               className="imghk"
             />
           </div>
@@ -95,23 +84,23 @@ export default function Dashboard() {
             );
           })}
         </ul>
-        <div className="boxer">
+        {/* <div className="boxer">
           <div id="pro">UPGRADE TO PRO</div>
-        </div>
+        </div> */}
       </div>
 
-
       {/* finally loading data here */}
-      <div className="orders">   
+      <div className="orders">
         <button className="btn" onClick={loadData}>
           Show My Current Orders
         </button>
-        {/* {orders.map((item) => {
+        {/* {state.map((item) => {
           return <Card item={item} />;
         })} */}
+
+        {/* <Card item={orders[1]} type={orders[0]} /> */}
+        {orders[1]?.map((items) => <CardColumns type={orders[0]} items={items} />)}
       </div>
-
-
     </div>
   );
 }

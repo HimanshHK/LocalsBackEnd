@@ -11,17 +11,6 @@ exports.getOrders = (req, res) => {
     });
 };
 
-// exports.getProduct = (req, res) => {
-//   const id = req.params.id;
-//   // console.log(id, "hi");
-//   ProductModal.findById(id)
-//     .then((data) => {
-//       res.json(data);
-//     })
-//     .catch((err) => {
-//       res.json({ message: err });
-//     });
-// };
 
 // POST Methods
 exports.postOrders = (req, res) => {
@@ -36,7 +25,6 @@ exports.postOrders = (req, res) => {
     cartItems: arr,
   });
 
-//   console.log(orders)
 
   orders.save().then((result) =>
       res

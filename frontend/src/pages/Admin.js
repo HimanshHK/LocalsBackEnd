@@ -31,7 +31,6 @@ export default function Admin() {
     fetch("http://localhost:3001/usersBlocked")
       .then((response) => response.json())
       .then((data) => {
-        // alert(data[0].input)
         console.log(data.user)
         changeValue(data.user);
       });
@@ -74,7 +73,7 @@ export default function Admin() {
         </div>
       </div>
 
-      <div className="users">
+      <div className="orders">
         <form onSubmit={blockData}>
           <div className="bhk">
             <input

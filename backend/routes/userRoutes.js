@@ -4,7 +4,9 @@ const uploads = require("../middlewares/uploads");
 const userController = require("../controller/userController");
 
 // GET Routes
-router.get("/usersBlocked", userController.getUsers);
+router.get("/usersBlocked", userController.getBlockedUsers);
+router.get("/usersAll", userController.getUsers);
+router.get("/user/:id", userController.getUserById);
 
 // POST Routes
 router.post("/user",userController.postUser);

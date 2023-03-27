@@ -9,6 +9,4 @@ router.get("/orders", ordersController.getOrders);
 // POST Routes
 router.post("/orders",ordersController.postOrders);
 
-// router.post("/orders", uploads.imageUpload.single("profile-pic"), userController.postRegister);
-
 module.exports = router;

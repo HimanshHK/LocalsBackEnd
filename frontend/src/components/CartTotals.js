@@ -15,7 +15,7 @@ const CartTotals = () => {
     }
 
       // console.log(cart);
-      let userName={buyerEmail:localStorage.getItem("Name")}
+      let userName={buyerEmail:localStorage.getItem("Email")}
       const inputs = [userName,...cart];
       // console.log();
       

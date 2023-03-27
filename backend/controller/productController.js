@@ -5,10 +5,10 @@ exports.getProducts = (req, res) => {
   ProductModal.find()
     .then((data) => {
       // console.log(data)
-      res.json(data);
+      res.status(200).json(data);
     })
     .catch((err) => {
-      res.json({ message: err });
+      res.status(404).json({ message: err });
     });
 };
 
@@ -17,10 +17,10 @@ exports.getProduct = (req, res) => {
   // console.log(id, "hi");
   ProductModal.findById(id)
     .then((data) => {
-      res.json(data);
+      res.status(200).json(data);
     })
     .catch((err) => {
-      res.json({ message: err });
+      res.status(404).json({ message: err });
     });
 };
 

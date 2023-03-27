@@ -2,7 +2,7 @@ const UserModal = require("../models/userModal");
 const bcrypt = require("bcrypt");
 
 // GET Methods
-exports.getUsers = (req, res, next) => {
+exports.getBlockedUsers = (req, res, next) => {
   return UserModal.find({ blocked: true }).then((user)=>{
     console.log(user);
     if(!user)
@@ -14,6 +14,28 @@ exports.getUsers = (req, res, next) => {
   // console.log(user)
 };
 
+exports.getUsers = (req, res, next) => {
+  UserModal.find()
+    .then((data) => {
+      // console.log(data)
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(404).json({ message: err });
+    });
+};
+
+exports.getUserById = (req, res, next) => {
+  const id = req.params.id;
+  // console.log(id, "hi");
+  UserModel.findById(id)
+    .then((data) => {
+      res.status(200).json(data);
+    })
+    .catch((err) => {
+      res.status(404).json({ message: err });
+    });
+};
 // POST Methods
 exports.postUser = (req, res, next) => {
   console.log(req.body);

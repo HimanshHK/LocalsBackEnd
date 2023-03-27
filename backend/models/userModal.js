@@ -12,7 +12,7 @@ const userSchema = new mongoose.Schema({
   },
   profilePicUrl: {
     type: String,
-    required: true,
+    required: false,
   },
   email: {
     type: String,
