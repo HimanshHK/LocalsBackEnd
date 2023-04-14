@@ -5,7 +5,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignInAdmin from './components/SignInAdmin';
 
-import { SupportAdmin,Home, SingleProduct, Cart, Checkout, Error, About, Products, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support ,Admin,ProfileAdmin} from './pages';
+import { SellerItems,Registered,SupportAdmin,Home, SingleProduct, Cart, Checkout, Error, About, Products, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support ,Admin,ProfileAdmin} from './pages';
 import AddProduct from "./pages/AddProduct";
 
 function App() {
@@ -18,6 +18,12 @@ function App() {
         <Switch>
           <Route exact path='/'>
             <Home />
+          </Route>
+          <Route exact path='/registered'>
+            <Registered />
+          </Route>
+          <Route exact path='/items'>
+            <SellerItems />
           </Route>
           <Route exact path='/about'>
             <About />

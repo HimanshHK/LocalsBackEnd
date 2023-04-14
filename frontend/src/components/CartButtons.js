@@ -18,20 +18,24 @@ const CartButtons = () => {
   const { loginWithRedirect, myUser, logout } = useUserContext();
 
   function logoutHandler() {
-    localStorage.clear();
+    // localStorage.clear();
+    localStorage.setItem("loggedIn", "false");
   }
 
   return (
     <Wrapper className="cart-btn-wrapper">
+      {localStorage.getItem("loggedIn") === "true" && localStorage.getItem("Type")==="Buyer" ?
       <Link to="/cart" onClick={closeSidebar} className="cart-btn">
         Cart
         <span className="cart-container">
           <FaShoppingCart />
           <span className="cart-value">{total_items}</span>
         </span>
-      </Link>
+      </Link>:(null)
+      }
+
       <div className="new">
-        {localStorage.getItem("loggedIn") === null ? (
+        {localStorage.getItem("loggedIn") === "false" ? (
           <Link to="/login" className="cart-btn">
             Login
             <span className="cart-container">
@@ -39,13 +43,14 @@ const CartButtons = () => {
             </span>
           </Link>
         ) : (
-          <Link to="/dashboard" className="cart-btn">
+          <Link to={localStorage.getItem("Type")==="Admin" ?  "/admin" : "/dashboard"} className="cart-btn">
             {localStorage.getItem("Name")}
             <span className="cart-container">
               <FaUserPlus />
             </span>
           </Link>
         )}
+
         <Link to="/login">
           <Button onClick={logoutHandler}>
             <span className="cart-container">

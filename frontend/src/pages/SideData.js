@@ -100,8 +100,8 @@ export const SideDataAdmin = [
         link:"/supportAdmin"
     },
     {
-        title:"Items",
+        title:"Registered",
         icon:<CategoryIcon/>,
-        link:"/Items"
+        link:"/registered"
     }
 ]

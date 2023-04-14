@@ -40,6 +40,8 @@ exports.postProduct = (req, res) => {
     reviews: Math.floor(Math.random(100)),
   });
 
+  // console.log(product);
+
   product
     .save()
     .then((result) =>
@@ -50,3 +52,30 @@ exports.postProduct = (req, res) => {
       res.status(403).json({message: "Something went wrong"})
     });
 };
+
+
+exports.postRemoveProduct = (req, res) => {
+  const id = req.body.id;
+  ProductModal.findByIdAndDelete(id)
+    .then(() => {
+      res.status(200).json({ message: "Product has been deleted" });
+    })
+    .catch((err) => {
+      res.status(404).json({ message: err });
+    });
+}
+
+
+
+exports.postLoadProductsOfUser = (req, res) => {
+  const comp = req.body.company;
+  ProductModal.find({company:comp})
+    .then((resData) => {
+      res.status(200).json({ message: "Your Products has been loaded", data:resData });
+    })
+    .catch((err) => {
+      res.status(404).json({ message: err });
+    });
+}
+
+

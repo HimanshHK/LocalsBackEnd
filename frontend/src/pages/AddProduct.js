@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Confirm from "./Confirm";
 
 const AddProduct = () => {
-  const [inputs, setInputs] = useState({});
+  const [inputs, setInputs] = useState({company:localStorage.getItem("Name")});
 
   const [submitted, setSubmitted] = useState(false);
   const handleChange = (event) => {
@@ -20,7 +20,7 @@ const AddProduct = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(inputs)
+    console.log(inputs);
     fetch("http://localhost:3001/product", {
       method: "POST",
       body: JSON.stringify(inputs),
@@ -45,10 +45,7 @@ const AddProduct = () => {
           <div className="headingid">
             <h2>Let's Add a new Product</h2>
           </div>
-          {/* <div className='form-item'>
-                        <label className="labelid">ID</label>
-                        <input name="id" value={inputs.id} required onChange={handleChange}/>
-                    </div> */}
+          
           <div className="form-item">
             <label className="labelid">Name</label>
             <input
@@ -87,19 +84,24 @@ const AddProduct = () => {
               onChange={handleChange}
             />
           </div>
+          
           <div className="form-item">
-            <label className="labelid">Category</label>
-            <input
-              name="category"
-              value={inputs.category}
-              onChange={handleChange}
-            />
-          </div>
+        <label className="labelid">Category</label>
+        <select name="category" value={inputs.category} onChange={handleChange}>
+          <option value="">Select a category</option>
+          <option value="Dairy">Dairy</option>
+          <option value="Fruits">Fruits</option>
+          <option value="Staples">Staples</option>
+          <option value="Cloth">Cloth</option>
+          <option value="Electronics">Electronics</option>
+          </select>
+         </div>
+
           <div className="form-item">
             <label className="labelid">Company</label>
             <input
               name="company"
-              value={inputs.brand}
+              value={localStorage.getItem("Name")}
               onChange={handleChange}
             />
           </div>

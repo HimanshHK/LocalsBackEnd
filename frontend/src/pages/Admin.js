@@ -8,10 +8,10 @@ import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 export default function Admin() {
  
   const [input, setInput] = useState("");
+  const [delinput, setdelInput] = useState("");
   const [value, changeValue] = useState([]);
 
   function blockData(event) {
-    // alert("blocked")
     event.preventDefault();
     console.log(input);
     fetch("http://localhost:3001/block-user", {
@@ -20,6 +20,21 @@ export default function Admin() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ email: input }),
+    })
+      .then((response) => response.json())
+      .then((resData) => console.log(resData))
+      .catch((err) => console.log(err));
+  }
+
+  function unblockData(event) {
+    event.preventDefault();
+    // console.log(delinput+"hk ");
+    fetch("http://localhost:3001/unblock-user", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email: delinput }),
     })
       .then((response) => response.json())
       .then((resData) => console.log(resData))
@@ -41,8 +56,12 @@ export default function Admin() {
     <div className="divid">
       <div className="sidebar">
         <div className="image">
-          <div className="img">
-            <AccountCircleIcon style={{ width: "40px", height: "40px" }} />
+        <div className="imghk">
+            <img
+              src={localStorage.getItem("ProfilePicUrl")}
+              alt="Profile Pic"  
+              className="imghk"
+            />
           </div>
           <div className="top-heading">
             {localStorage.getItem("loggedIn") === null
@@ -84,6 +103,20 @@ export default function Admin() {
             />
             <button className="btn" type="submit">
               Block
+            </button>
+          </div>
+        </form>
+
+        <form onSubmit={unblockData}>
+          <div className="bhk">
+            <input
+              name="block"
+              className="blockfld"
+              value={delinput}
+              onChange={(e) => setdelInput(e.target.value)}
+            />
+            <button className="btn" type="submit">
+              UnBlock
             </button>
           </div>
         </form>

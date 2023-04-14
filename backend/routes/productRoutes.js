@@ -18,4 +18,7 @@ router.post("/product", [
     check('stock').isNumeric(),
   ], productController.postProduct);
 
+
+router.post("/remove-item",productController.postRemoveProduct);
+router.post("/load-items-user",productController.postLoadProductsOfUser)
 module.exports = router;

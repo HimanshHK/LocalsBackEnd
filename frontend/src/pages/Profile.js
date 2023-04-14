@@ -66,7 +66,7 @@ export default function Dashboard() {
      <h5 className='uphk'>Email :</h5>
      <h5 className='downhk'>{localStorage.getItem("Email")}</h5>
      <h5 className='uphk'>Contact :</h5>
-     <h5 className='downhk'>9991375659</h5>
+     <h5 className='downhk'>{localStorage.getItem("Phone")}</h5>
       
       <h5 className='uphk'>Address :</h5>
       <h5 className='downhk'>{localStorage.getItem("Address")}</h5>

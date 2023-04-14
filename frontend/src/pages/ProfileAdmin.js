@@ -1,26 +1,24 @@
 import React,{useEffect,useState} from 'react';
-import { FaBeer, FaWindows } from 'react-icons/fa';
 import './Dashboard.css';
 import { SideDataAdmin } from './SideData';
-import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import axios from 'axios'
-
-
-import Box from '@mui/material/Box';
-import Card from './Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import {AiOutlineInstagram} from 'react-icons/ai';
+import {AiOutlineFacebook,AiOutlineTwitter} from 'react-icons/ai';
 
 
 
-export default function ProfileAdmin() {  
-
+export default function ProfileAdmin() {
+ 
+  const [data,setData]=useState([]);
+  
+  useEffect(()=>{
+    axios.get('http://localhost:3001/orders')
+        .then(response => {
+            console.log(response)
+            setData(response.data)
+        })
+   },[])
   return (
     <div className="divid">
     <div className="sidebar">
@@ -49,16 +47,42 @@ export default function ProfileAdmin() {
         })}
       </ul>
       <div className="boxer">
-        <div id="pro" >UPGRADE TO PRO</div>
+        <div id="pro">UPGRADE TO PRO</div>
       </div>
     </div>
      
     <div className='orders'>
-      <h3>Name  : Admin </h3>
-      <h5>Email :shopper365@gmail.com</h5>
-      <h5>Phone :9991375659</h5>
-      <h5>Address : Abhi bnaa rhe hai!!!!</h5>
-      </div>          
+    <div><h1 className="upperhk">{localStorage.getItem("Name")}</h1>
+    <h4>({localStorage.getItem("Type")})</h4>
+    </div>
+     
+     <div className="hk">
+     <div>
+        <img src={localStorage.getItem("ProfilePicUrl")} alt="profile-Pic-Admin" className="imagehk" />
+     </div>
+
+     <div className="divhk">
+     <h3 className="nhk">Details:</h3>
+     <h5 className='uphk'>Email :</h5>
+     <h5 className='downhk'>{localStorage.getItem("Email")}</h5>
+     <h5 className='uphk'>Contact :</h5>
+     <h5 className='downhk'>{localStorage.getItem("Phone")}</h5>
+      
+      <h5 className='uphk'>Address :</h5>
+      <h5 className='downhk'>{localStorage.getItem("Address")}</h5>
+
+      <div className="iconhk">
+      <AiOutlineInstagram size="2.5rem"/>
+      <AiOutlineFacebook size="2.5rem"/>
+      <AiOutlineTwitter size="2.5rem"/>
+      </div>
+     </div>
+
+     </div>
+      
+      </div>
+    
+                
     </div>
   );
 }

@@ -9,7 +9,7 @@ import Confirm from "./Confirm";
 
 
 const Feed = () => {
-    const [inputs, setInputs] = useState({});
+    const [inputs, setInputs] = useState({mail:localStorage.getItem('Email')});
 
     const [submitted,setSubmitted]= useState(false);
     const handleChange = (event) => {
@@ -32,11 +32,11 @@ const Feed = () => {
     
 
     };
-    if(submitted===false) {
+    if(submitted===false && localStorage.getItem('loggedIn')==='true' &&(localStorage.getItem('Type')==='Buyer' || localStorage.getItem('Type')==='Seller')) {
         return (
             <Wrapper>
-                {/* <div className='divider'></div> */}
-                <h3 className='head'>Let's Have a feedback</h3>
+                
+                  <h3 className='head'>Let's Have a feedback</h3>
                 <form onSubmit={handleSubmit} className="add">
                     <div className='form-item'>
                         <label>Name</label>
@@ -44,7 +44,7 @@ const Feed = () => {
                     </div>
                     <div className='form-item'>
                         <label>E-mail</label>
-                        <input name="mail" type='email' value={inputs.mail} required onChange={handleChange}/>
+                        <input name="mail" type='email' value= {localStorage.getItem('Email')} required onChange={handleChange}/>
                     </div>
 
                     <div className='form-item'>
@@ -61,9 +61,13 @@ const Feed = () => {
             </Wrapper>
         );
     }
-    else{
-        return (<Confirm comp='message'/>)
-    }
+    else if(localStorage.getItem('loggedIn')==='true')
+    return (
+    null
+    )
+    else
+    return (<Confirm comp='message'/>)
+    
 };
 
 

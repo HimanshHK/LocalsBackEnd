@@ -55,29 +55,29 @@ const Nav = () => {
             </button>
 
           </div>
+          
           <ul className='nav-links'>
-            {links_hk.map((link) => {
-              const { id, text, url } = link;
-              {/* if(localStorage.getItem()) */}
-              return (
-                  <li key={id}>
-                    <Link to={url}>{text}</Link>
-                  </li>
-              );
-            })}
+              <li>
+                <Link to='/'>home</Link>
+              </li>
+              <li>
+                <Link to='/products'>products</Link>
+              </li>
+              
+              <li>
+                <Link to='/about'>about</Link>
+              </li>
 
-            {myUser && (
+              {localStorage.getItem("loggedIn") === "true" && localStorage.getItem("Type")==="Seller" ? 
+              (
                 <li>
-                  <Link to='/checkout'>checkout</Link>
+                <Link to='/addproduct'>add product</Link>
                 </li>
-            )}
+              ):(null)}
+              
           </ul>
           <CartButtons />
           
-          {/* <div className="cartbutton">
-            <Link to='/cart'><h4 className="cartbutton"><ShoppingCartRoundedIcon/>Cart</h4></Link>
-            <Link to='/login'><h4 className="cartbutton"><LoginRoundedIcon/>Login</h4></Link>
-          </div> */}
         </div>
       </NavContainer>
   );

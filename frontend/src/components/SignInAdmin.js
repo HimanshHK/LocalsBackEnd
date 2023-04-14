@@ -57,6 +57,11 @@ export default function SignUp() {
                 localStorage.setItem('loggedIn','true')
                 localStorage.setItem('Email',inputs.email)
                 localStorage.setItem('Name','Admin')
+                localStorage.setItem("Type","Admin");
+                localStorage.setItem("Address", "Plot no 31. Sector 12, Dwarka, New Delhi, 110075");
+                localStorage.setItem("Phone", "9876543210");
+                localStorage.setItem("ProfilePicUrl", `https://w0.peakpx.com/wallpaper/981/593/HD-wallpaper-hacker-dark-mask.jpg`)
+                localStorage.setItem("loggedIn", "true");
                 alert("Logged In Successfully");
                 history.push('/admin');
               }
