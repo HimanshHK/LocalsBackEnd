@@ -33,7 +33,7 @@ export default function Dashboard() {
         {SideData.map((val, key) => {
           return (
             <li
-              id={window.location.pathname == val.link ? 'active' : ''}
+              id={window.location.pathname === val.link ? 'active' : ''}
               className="row"
               key={key}
               onClick={() => {

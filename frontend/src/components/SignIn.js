@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import useForm from "./useForm";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -21,7 +21,7 @@ import { useEffect } from "react";
 import Redux from "react-redux";
 import { useHistory } from "react-router-dom";
 import { truncate } from "lodash";
-
+import { UserContext } from '../App.js';
 function Copyright(props) {
   return (
     <Typography
@@ -44,8 +44,9 @@ const theme = createTheme();
 let userState = {};
 //const {userState,changeUserstate}=useState({})
 
-export default function SignIn() {
+export default function SignIn({handleDataUser}) {
   const [inputs, setInputs] = useState({});
+  const user = useContext(UserContext);
   const handleChange = (event) => {
     const name = event.target.name;
     const value =
@@ -54,6 +55,7 @@ export default function SignIn() {
         : event.target.value;
     setInputs((values) => ({ ...values, [name]: value }));
   };
+  
 
 
   const history = useHistory();
@@ -80,6 +82,16 @@ export default function SignIn() {
           return;
         }
         console.log(resData);
+          let newuser={
+            Name:resData.user.name,
+            Email:resData.user.email,
+            Address:resData.user.address,
+            Phone:resData.user.phone,
+            Type:resData.user.type,
+            ProfilePicUrl:resData.user.profilePicUrl,
+            loggedIn:true
+          }
+          handleDataUser(newuser);
           localStorage.setItem("Name", resData.user.name);
           localStorage.setItem("Email", resData.user.email);
           localStorage.setItem("Address", resData.user.address);
@@ -89,7 +101,7 @@ export default function SignIn() {
           localStorage.setItem("loggedIn", "true");
 
           alert("Logged In Successfully");
-          history.push("/profile");
+          history.push("/dashboard");
           return;
       })
       .catch((error) => {

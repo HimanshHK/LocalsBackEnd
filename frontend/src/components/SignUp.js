@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState,useEffect,useContext } from "react";
 import useForm from "./useForm";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
@@ -17,6 +17,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useFormik, Formik } from "formik";
 import "./Signup.css";
 import { Radio } from "@mui/material";
+
 
 function Copyright(props) {
   return (
@@ -43,11 +44,12 @@ export default function SignUp() {
     console.log("Callback function when form is submitted!");
     console.log("Form Values ", values);
   };
-
+  
   const { handleChange, values, errors, handleSubmit, valuesss } =
     useForm(formLogin);
-  const [inputs, setInputs] = useState({});
 
+  const [inputs, setInputs] = useState({});
+  
   return (
     <div className="login-root">
       <div className="box-root flex-flex flex-direction--column fi">

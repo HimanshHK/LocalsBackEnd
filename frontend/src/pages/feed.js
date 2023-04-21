@@ -8,7 +8,7 @@ import Confirm from "./Confirm";
 
 
 
-const Feed = () => {
+const Feed = ({handlefeeds}) => {
     const [inputs, setInputs] = useState({mail:localStorage.getItem('Email')});
 
     const [submitted,setSubmitted]= useState(false);
@@ -19,6 +19,7 @@ const Feed = () => {
     };
 
     const handleSubmit = (event) => {
+      handlefeeds()
         setSubmitted(true)
         return fetch('http://localhost:3001/feeds', {
             method: 'POST',

@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import Confirm from "./Confirm";
 
 const AddProduct = () => {
-  const [inputs, setInputs] = useState({company:localStorage.getItem("Name")});
+  const [inputs, setInputs] = useState({company:localStorage.getItem("Name"),seller:localStorage.getItem("Email")});
 
   const [submitted, setSubmitted] = useState(false);
   const handleChange = (event) => {

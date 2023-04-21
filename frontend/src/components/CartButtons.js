@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useContext} from "react";
 import {
   FaShoppingCart,
   FaUserMinus,
@@ -11,20 +11,20 @@ import { useProductsContext } from "../context/products_context";
 import { useCartContext } from "../context/cart_context";
 import { useUserContext } from "../context/user_context";
 import { Button } from "@mui/material";
-
+import { UserContext } from '../App.js';
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
   const { total_items, clearCart } = useCartContext();
   const { loginWithRedirect, myUser, logout } = useUserContext();
-
+  const user =  useContext(UserContext);
   function logoutHandler() {
-    // localStorage.clear();
+    localStorage.clear();
     localStorage.setItem("loggedIn", "false");
   }
 
   return (
     <Wrapper className="cart-btn-wrapper">
-      {localStorage.getItem("loggedIn") === "true" && localStorage.getItem("Type")==="Buyer" ?
+      {user.loggedIn === "true" && user.Type==="Buyer" ?
       <Link to="/cart" onClick={closeSidebar} className="cart-btn">
         Cart
         <span className="cart-container">
@@ -35,7 +35,7 @@ const CartButtons = () => {
       }
 
       <div className="new">
-        {localStorage.getItem("loggedIn") === "false" ? (
+        {user.loggedIn === "false" ? (
           <Link to="/login" className="cart-btn">
             Login
             <span className="cart-container">
@@ -43,8 +43,8 @@ const CartButtons = () => {
             </span>
           </Link>
         ) : (
-          <Link to={localStorage.getItem("Type")==="Admin" ?  "/admin" : "/dashboard"} className="cart-btn">
-            {localStorage.getItem("Name")}
+          <Link to={user.Type==="Admin" ?  "/admin" : "/dashboard"} className="cart-btn">
+            {user.Name}
             <span className="cart-container">
               <FaUserPlus />
             </span>

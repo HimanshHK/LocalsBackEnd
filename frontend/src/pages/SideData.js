@@ -75,11 +75,40 @@ export const SideData = [
         link:"/support"
     },
     {
-        title:"Items",
+        title:"Orders",
         icon:<CategoryIcon/>,
-        link:"/Items"
+        link:"/orders"
     }
 ]
+
+export const sellerSideData = [
+    {
+        title:"Home",
+        icon:<HomeIcon/>,
+        link:"/dashboard"
+    },
+    {
+        title:"Profile",
+        icon:<PersonIcon/>,
+        link:"/profile"
+    },
+    {
+        title:"Support",
+        icon:<ReceiptIcon/>,
+        link:"/support"
+    },
+    {
+        title:"Orders",
+        icon:<CategoryIcon/>,
+        link:"/ordersAll"
+    },
+    {
+        title:"My Products",
+        icon:<CategoryIcon/>,
+        link:"/myProducts"
+    }
+]
+
 
 
 
@@ -95,13 +124,18 @@ export const SideDataAdmin = [
         link:"/profileAdmin"
     },
     {
+        title:"Users",
+        icon:<RedeemIcon/>,
+        link:"/users"
+    },{
+        title:"Blocked Users",
+        icon:<RedeemIcon/>,
+        link:"/blockedUsers"
+    }
+    ,
+    {
         title:"Support",
         icon:<ReceiptIcon/>,
         link:"/supportAdmin"
-    },
-    {
-        title:"Registered",
-        icon:<CategoryIcon/>,
-        link:"/registered"
     }
 ]

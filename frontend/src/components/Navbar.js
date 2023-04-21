@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 import { FaBars, FaDoorOpen } from 'react-icons/fa';
@@ -10,13 +10,13 @@ import CartButtons from './CartButtons';
 import { useProductsContext } from '../context/products_context';
 import { useUserContext } from '../context/user_context';
 import Sidebar from './Sidebar';
-
+import { UserContext } from '../App.js';
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
   const { myUser } = useUserContext();
-
-
+  
+  const user =  useContext(UserContext);
   const links_hk = [
     {
         id: 1,
@@ -68,7 +68,7 @@ const Nav = () => {
                 <Link to='/about'>about</Link>
               </li>
 
-              {localStorage.getItem("loggedIn") === "true" && localStorage.getItem("Type")==="Seller" ? 
+              {user.loggedIn === "true" && user.Type==="Seller" ? 
               (
                 <li>
                 <Link to='/addproduct'>add product</Link>

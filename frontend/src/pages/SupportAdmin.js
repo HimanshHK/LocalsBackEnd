@@ -65,48 +65,12 @@ export default function SupportAdmin() {
     <div className="orders">
       {console.log(data)}
       <ul>
-         {/* {
-          data.map((msg)=>(
-            msg.map((msg1)=>(
-              <> */}
               <div className='support'>
                 <h3>Stay Connected</h3>
                 <h5 >For More information, you can connect our Chief Engineer</h5>
                 <h4 >Mr. Talwar Veera </h4>
                 <h4>  <CallIcon/> 9876543210</h4> 
-
               </div>
-            
-
-
-      {/* <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            {msg1.name}
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {msg1.amount} Pieces
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {msg1.price}RS
-          </Typography>
-        </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-             dispatched
-        </Box>
-      </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: 150 }}
-        image={msg1.image}
-        alt="hai hi nhi"
-        />
-    </Card> */}
-              {/* </>
-            ))
-          ))
-         } */}
         </ul>
     </div>
                 

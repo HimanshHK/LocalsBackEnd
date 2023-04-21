@@ -15,7 +15,7 @@ exports.getBlockedUsers = (req, res, next) => {
 };
 
 exports.getUsers = (req, res, next) => {
-  UserModal.find()
+  UserModal.find({blocked:false})
     .then((data) => {
       // console.log(data)
       res.status(200).json(data);

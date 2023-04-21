@@ -3,6 +3,7 @@ const router = require("express").Router();
 const authController = require("../controller/adminController");
 
 // POST Routes
-router.post("/block-user", authController.postBlockUser)
-router.post("/unblock-user", authController.postUnblockUser)
+router.put("/block-user", authController.postBlockUser)
+router.put("/unblock-user", authController.postUnblockUser)
+router.delete("/delete-user",authController.deleteUser)
 module.exports = router;

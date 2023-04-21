@@ -12,6 +12,31 @@ exports.getProducts = (req, res) => {
     });
 };
 
+exports.getSellerProducts=(req,res)=>{
+  const seller=req.params.seller;
+  console.log(seller)
+  ProductModal.find({seller:seller})
+  .then((data) => {
+    res.status(200).json(data);
+  })
+  .catch((err) => {
+    res.status(404).json({ message: err });
+  });
+}
+
+exports.deleteProduct=(req,res)=>{
+  console.log(req.body.id)
+  ProductModal.deleteOne({ _id: req.body.id })
+  .then((product) => {
+      if (!product) {
+          return res.status(403).json({ message: "Product does not exist" });
+      }
+      return res.status(201).json({ message: "Product has been deleted!!!", result: product });
+  })
+  .catch((err) => {
+      return res.status(500).json({ error: err });
+  });
+}
 exports.getProduct = (req, res) => {
   const id = req.params.id;
   // console.log(id, "hi");
@@ -34,6 +59,7 @@ exports.postProduct = (req, res) => {
     image: req.body.image,
     category: req.body.category,
     company: req.body.company,
+    seller:req.body.seller,
     stock: req.body.stock,
     reviews: req.body.reviews,
     stars: Math.random() * 2 + 3,

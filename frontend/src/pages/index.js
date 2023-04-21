@@ -16,5 +16,5 @@ import ProfileAdmin from './ProfileAdmin';
 import SupportAdmin from './SupportAdmin';
 import Registered from './Registered';
 import SellerItems from './SellerItems';
-
-export { SellerItems,Registered,SupportAdmin,ProfileAdmin,Home, Products, SingleProduct, About, Cart, Error, Checkout, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support,Admin };
+import Users from './Users.js';
+export { SellerItems,Registered,SupportAdmin,ProfileAdmin,Home, Products, SingleProduct, About, Cart, Error, Checkout, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support,Admin,Users };
