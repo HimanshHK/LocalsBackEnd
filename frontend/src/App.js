@@ -5,7 +5,7 @@ import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import SignInAdmin from './components/SignInAdmin';
 
-import { SellerItems,Registered,SupportAdmin,Home, SingleProduct, Cart, Checkout, Error, About, Products, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support ,Admin,ProfileAdmin,Users} from './pages';
+import { Update,SellerItems,Registered,SupportAdmin,Home, SingleProduct, Cart, Checkout, Error, About, Products, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support ,Admin,ProfileAdmin,Users} from './pages';
 import AddProduct from "./pages/AddProduct";
 
 export const UserContext = createContext(null);
@@ -38,6 +38,9 @@ const handleDataUser = (newuser) => {
           </Route>
           <Route exact path='/registered'>
             <Registered />
+          </Route>
+          <Route exact path='/update'>
+            <Update handleDataUser={handleDataUser}/>
           </Route>
           <Route exact path='/items'>
             <SellerItems />
@@ -88,7 +91,7 @@ const handleDataUser = (newuser) => {
             <Error />
           </Route>
         </Switch>
-
+          
         <Footer />
       </Router>
     </div>

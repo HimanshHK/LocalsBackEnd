@@ -176,6 +176,32 @@ color: black;
   padding: 20px;
 }
 
+.order-content {
+  display: grid;
+  grid-template-columns: 316px 1fr 1fr 1fr auto;
+  justify-items: center;
+  column-gap: 1rem;
+  
+}
+.content h5 {
+  color: #211b1b;
+  font-weight: 400;
+}
+.content span {
+  width: 2rem;
+  height: 2rem;
+}
+.content hr {
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+.subtotal {
+  display: none;
+}
+.price {
+  display: none;
+}
+
 .user-list {
   list-style-type: none;
   

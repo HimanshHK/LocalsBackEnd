@@ -95,7 +95,7 @@ export default function SignIn({handleDataUser}) {
           localStorage.setItem("Name", resData.user.name);
           localStorage.setItem("Email", resData.user.email);
           localStorage.setItem("Address", resData.user.address);
-          localStorage.setItem("Phone", resData.user.phone);
+          localStorage.setItem("Phone", resData.user.mobile);
           localStorage.setItem("Type", resData.user.type);
           localStorage.setItem("ProfilePicUrl", `http://localhost:3001/${resData.user.profilePicUrl}`)
           localStorage.setItem("loggedIn", "true");

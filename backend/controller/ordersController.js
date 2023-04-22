@@ -51,39 +51,47 @@ exports.getOrdersBuyer = async (req, res) => {
 exports.getOrdersSeller = async (req, res) => {
   try {
     const sellerEmail = req.params.sellerEmail;
-    
-    const orders = await OrdersModal.find(); 
-    
-    const productIds = orders.map(order => order.cartItems.map(product => product.id)).flat(); 
-    
-    const products = await Promise.all(productIds.map(productId => {
-      return ProductModal.findOne({ _id: productId }); 
-    }));
 
-    const filteredProducts = products.filter(product => product);
-    
-    const productsWithAdditionalFields = filteredProducts.map(product => {
-      const order = orders.find(order => order.cartItems.some(item => item.id === product._id.toString()));
+    const orders = await OrdersModal.find({"cartItems.seller": sellerEmail}); 
+
+    const cartItems = orders.flatMap(order => {
       
-      return {
-        ...product.toObject(), 
-        buyerEmail: order.buyerEmail,
-        oid:    order._id
-        status: order.cartItems.find(item => item.id === product._id.toString()).status,
-        amount: order.cartItems.find(item => item.id === product._id.toString()).amount
-      };
+      return order.cartItems.filter(item => {
+        
+        return item.seller === sellerEmail;
+      }).map(item => {
+        
+        return {
+          ...item,
+          oid: order._id,
+          buyerEmail:order.buyerEmail
+        };
+      });
     });
-
-    console.log(productsWithAdditionalFields)
-    const filteredProductsByProperty = productsWithAdditionalFields.filter(product => {
-      return product.seller===sellerEmail;
-    });
-    console.log(filteredProductsByProperty)
-    res.json(filteredProductsByProperty); 
+    
+    console.log(cartItems)
+    res.json(cartItems); 
   } catch (err) {
+    console.log(err)
     res.json({ message: err });
   }
 };
+
+// exports.getOrdersSeller = async (req, res) => {
+//   try {
+//     const sellerEmail = req.params.sellerEmail;
+    
+//     const orders = await OrdersModal.find({"cartItems.seller": sellerEmail}); 
+//     const cartItems = orders.flatMap(order => { order.cartItems.filter(item => item.seller === sellerEmail)});
+    
+    
+    
+//     console.log(cartItems)
+//     res.json(cartItems); 
+//   } catch (err) {
+//     res.json({ message: err });
+//   }
+// };
 
 
 
@@ -123,13 +131,23 @@ exports.postOrders = (req, res) => {
   for(let i=1;i<req.body.length;i++){
     arr.push(req.body[i])
     }
-
+  
   const orders = new OrdersModal({
     buyerEmail: req.body[0].buyerEmail,
     cartItems: arr,
   });
-
-
+  const productIds = arr.map(item => item.id);
+  ProductModal.find({ _id: { $in: productIds }})
+    .then(products => {
+      // Update the stock value for each product based on the quantity ordered
+      arr.forEach(item => {
+        const product = products.find(p => p._id.equals(item.id));
+        if (product) {
+          product.stock -= item.amount;
+          product.save();
+        }
+      });})
+  
   orders.save().then((result) =>
       res
         .status(200)

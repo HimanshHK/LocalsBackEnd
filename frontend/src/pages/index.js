@@ -17,4 +17,5 @@ import SupportAdmin from './SupportAdmin';
 import Registered from './Registered';
 import SellerItems from './SellerItems';
 import Users from './Users.js';
-export { SellerItems,Registered,SupportAdmin,ProfileAdmin,Home, Products, SingleProduct, About, Cart, Error, Checkout, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support,Admin,Users };
+import Update from './Update'
+export { Update, SellerItems,Registered,SupportAdmin,ProfileAdmin,Home, Products, SingleProduct, About, Cart, Error, Checkout, PrivateRoute, AuthWrapper,Dashboard,Profile,Orders,Support,Admin,Users };

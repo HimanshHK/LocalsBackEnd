@@ -10,7 +10,7 @@ router.get("/user/:id", userController.getUserById);
 
 // POST Routes
 router.post("/user",userController.postUser);
-
+router.post("/userUpdate",userController.postUpdateUser);
 router.post("/users", [
     check('name').notEmpty(),
     check('password').isLength({ min: 6 }),
