@@ -49,43 +49,19 @@ export default function SignUp() {
     setInputs((values) => ({ ...values, [name]: value }));
 };
 
-  const [data,setData]=useState([]);
-  const [userState,changeUserstate]=useState([])
-    useEffect(()=>{
-        axios.get('http://localhost:3001/users')
-            .then(response => {
-                console.log(response)
-                setData(response.data)
-            })
-    },[])
-
-    const [blocked,setBloclked]=useState([]);
-    useEffect(()=>{
-        axios.get('http://localhost:3001/blocked')
-            .then(response => {
-                console.log(response)
-                setBloclked(response.data)
-
-            })
-    },[])
-
-    // useEffect(()=>{
-    //   //add data in db.json
-    //   axios.post('http://localhost:3001/login',{name:userState})
-    //       .then(response => {
-    //         console.log("Done!!")
-    //       }
-    //   )      
-    // },[userState])
-    const history= useHistory();
+  const history= useHistory();
   const handleSubmit = () => {
-      
           
           if("shopper365@gmail.com"===inputs.email){
               if("Hk453@123#"===inputs.password){
                 localStorage.setItem('loggedIn','true')
                 localStorage.setItem('Email',inputs.email)
                 localStorage.setItem('Name','Admin')
+                localStorage.setItem("Type","Admin");
+                localStorage.setItem("Address", "Plot no 31. Sector 12, Dwarka, New Delhi, 110075");
+                localStorage.setItem("Phone", "9876543210");
+                localStorage.setItem("ProfilePicUrl", `https://w0.peakpx.com/wallpaper/981/593/HD-wallpaper-hacker-dark-mask.jpg`)
+                localStorage.setItem("loggedIn", "true");
                 alert("Logged In Successfully");
                 history.push('/admin');
               }
@@ -140,11 +116,11 @@ export default function SignUp() {
                       <input type="submit" name="submit" value="Continue"/>
                     </div>
                     <div>
-                    <Link href="/signin" variant="body2">
+                    <Link id="foot" href="/signin" variant="body2">
                            {"Don't have an account?"}
                     </Link>
                     <br/>
-                    <Link href="/signadmin" variant="body2">
+                    <Link id="foot" href="/signadmin" variant="body2">
                            {"Sign In as Admin"}
                     </Link>
                     </div>

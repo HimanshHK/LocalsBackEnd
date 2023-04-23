@@ -1,61 +1,65 @@
-import React from 'react';
-import { FaShoppingCart, FaUserMinus, FaUserPlus,FaDoorOpen } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
-import { useProductsContext } from '../context/products_context';
-import { useCartContext } from '../context/cart_context';
-import { useUserContext } from '../context/user_context';
-import { Button } from '@mui/material';
-// import Modal from './login/Modal'
-
+import React,{useContext} from "react";
+import {
+  FaShoppingCart,
+  FaUserMinus,
+  FaUserPlus,
+  FaDoorOpen,
+} from "react-icons/fa";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { useProductsContext } from "../context/products_context";
+import { useCartContext } from "../context/cart_context";
+import { useUserContext } from "../context/user_context";
+import { Button } from "@mui/material";
+import { UserContext } from '../App.js';
 const CartButtons = () => {
   const { closeSidebar } = useProductsContext();
   const { total_items, clearCart } = useCartContext();
   const { loginWithRedirect, myUser, logout } = useUserContext();
+  const user =  useContext(UserContext);
+  function logoutHandler() {
+    localStorage.clear();
+    localStorage.setItem("loggedIn", "false");
+  }
 
   return (
-      <Wrapper className="cart-btn-wrapper">
-        <Link to="/cart" onClick={closeSidebar} className="cart-btn">
-          Cart
-          <span className="cart-container">
+    <Wrapper className="cart-btn-wrapper">
+      {user.loggedIn === "true" && user.Type==="Buyer" ?
+      <Link to="/cart" onClick={closeSidebar} className="cart-btn">
+        Cart
+        <span className="cart-container">
           <FaShoppingCart />
           <span className="cart-value">{total_items}</span>
         </span>
-        </Link>
-        {/* {myUser ? (
-            <button
-                type="button"
-                className="auth-btn"
-                onClick={() => {
-                  clearCart();
-                  logout({ returnTo: window.location.origin });
-                }}
-            >
-              Logout <FaUserMinus />
-            </button>
-        ) : (
-            <button type="button" className="auth-btn">
-              Login <FaUserPlus />
-            </button>
-        )} */}
-        <div className='new'>
-        {(localStorage.getItem('loggedIn')===null)?<Link to="/login" className="cart-btn">
-          Login
-          <span className="cart-container">
-          <FaUserPlus /></span></Link>:<Link to="/dashboard" className="cart-btn">
-          {localStorage.getItem('Name')}
-          <span className="cart-container"><FaUserPlus /></span></Link>
-          }
-          <Link to="/login" >
-          <Button>
-          <span className="cart-container"><FaDoorOpen/></span></Button>
-          </Link>
-          </div>
-        
-        
-          
+      </Link>:(null)
+      }
 
-      </Wrapper>
+      <div className="new">
+        {user.loggedIn === "false" ? (
+          <Link to="/login" className="cart-btn">
+            Login
+            <span className="cart-container">
+              <FaUserPlus />
+            </span>
+          </Link>
+        ) : (
+          <Link to={user.Type==="Admin" ?  "/admin" : "/dashboard"} className="cart-btn">
+            {user.Name}
+            <span className="cart-container">
+              <FaUserPlus />
+            </span>
+          </Link>
+        )}
+
+        <Link to="/login">
+          <Button onClick={logoutHandler}>
+            <span className="cart-container">
+              <FaDoorOpen />
+            </span>
+          </Button>
+        </Link>
+      </div>
+    </Wrapper>
   );
 };
 
@@ -64,10 +68,10 @@ const Wrapper = styled.div`
   grid-template-columns: 1fr 1fr;
   align-items: center;
   width: 225px;
-   .new{
+  .new {
     margin-left: 10px;
     display: flex;
-   }
+  }
   .cart-btn {
     color: var(--clr-grey-1);
     font-size: 1.5rem;

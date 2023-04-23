@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import styled from 'styled-components';
 import logo from '../assets/logo.png';
 import { FaBars, FaDoorOpen } from 'react-icons/fa';
@@ -10,13 +10,13 @@ import CartButtons from './CartButtons';
 import { useProductsContext } from '../context/products_context';
 import { useUserContext } from '../context/user_context';
 import Sidebar from './Sidebar';
-
+import { UserContext } from '../App.js';
 
 const Nav = () => {
   const { openSidebar } = useProductsContext();
   const { myUser } = useUserContext();
-
-
+  
+  const user =  useContext(UserContext);
   const links_hk = [
     {
         id: 1,
@@ -55,29 +55,29 @@ const Nav = () => {
             </button>
 
           </div>
+          
           <ul className='nav-links'>
-            {links_hk.map((link) => {
-              const { id, text, url } = link;
-              {/* if(localStorage.getItem()) */}
-              return (
-                  <li key={id}>
-                    <Link to={url}>{text}</Link>
-                  </li>
-              );
-            })}
+              <li>
+                <Link to='/'>home</Link>
+              </li>
+              <li>
+                <Link to='/products'>products</Link>
+              </li>
+              
+              <li>
+                <Link to='/about'>about</Link>
+              </li>
 
-            {myUser && (
+              {user.loggedIn === "true" && user.Type==="Seller" ? 
+              (
                 <li>
-                  <Link to='/checkout'>checkout</Link>
+                <Link to='/addproduct'>add product</Link>
                 </li>
-            )}
+              ):(null)}
+              
           </ul>
           <CartButtons />
           
-          {/* <div className="cartbutton">
-            <Link to='/cart'><h4 className="cartbutton"><ShoppingCartRoundedIcon/>Cart</h4></Link>
-            <Link to='/login'><h4 className="cartbutton"><LoginRoundedIcon/>Login</h4></Link>
-          </div> */}
         </div>
       </NavContainer>
   );

@@ -14,9 +14,11 @@ const CartTotals = () => {
         console.log(token);
     }
 
-      let userName={buyerName:"himanshu",sellerName:"kataria"}
+      // console.log(cart);
+      let userName={buyerEmail:localStorage.getItem("Email")}
       const inputs = [userName,...cart];
-      console.log();
+      // console.log();
+      
       const setOrder = () => { 
         return fetch('http://localhost:3001/orders', {
           method: 'POST',
@@ -53,7 +55,7 @@ const CartTotals = () => {
                       stripeKey="pk_test_51MBdYtSHqt13bUHuSugZS2VbDFbNFwLdglHgpb7umqF0FyhhaQSbyGv3br0HqUz92W69HUof8eahVBPlhHfwgg4u00x21secuO"
                     >
                     <button onClick={setOrder} className='btn' type='button'>
-                        <div >Proceed to Pay</div>
+                        <div>Proceed to Pay</div>
                     </button>
 
                     </StripeCheckout>

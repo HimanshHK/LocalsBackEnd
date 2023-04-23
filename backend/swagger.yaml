@@ -260,6 +260,9 @@ definitions:
       password:
         type: "string"
         example: "Ss@123456"
+      confirmPassword:
+        type: "string"
+        example: "Ss@123456"
       profilePicUrl:
         type: "string"
         example: "https://www.google.com/imgres?imgurl=https%3A%2F%2Fimages.unsplash.com%2Fphoto-1575936123452-b67c3203c357%3Fixlib%3Drb-4.0.3%26ixid%3DMnwxMjA3fDB8MHxzZWFyY2h8Mnx8aW1hZ2V8ZW58MHx8MHx8%26w%3D1000%26q%3D80&tbnid=YmDohMp4T5AODM&vet=12ahUKEwjm0rqq7Pn9AhWhjOYKHSI_DDUQMygBegUIARC-AQ..i&imgrefurl=https%3A%2F%2Funsplash.com%2Fs%2Fphotos%2Fimage&docid=ExDvm63D_wCvSM&w=1000&h=667&itg=1&q=image&client=opera&ved=2ahUKEwjm0rqq7Pn9AhWhjOYKHSI_DDUQMygBegUIARC-AQ"
@@ -337,9 +340,6 @@ definitions:
   Order:
     type: object
     properties:
-       sellerEmail:
-          type: string
-          example: "mrsm492002@gmail.com"
        buyerEmail:
           type: string
           example: "mrsm492002@gmail.com"

@@ -1,21 +1,10 @@
 import React,{useEffect,useState} from 'react';
-import { FaBeer, FaWindows } from 'react-icons/fa';
 import './Dashboard.css';
 import { SideData } from './SideData';
-import { Link } from 'react-router-dom';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import axios from 'axios'
-
-
-import Box from '@mui/material/Box';
-import Card from './Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
-import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import SkipNextIcon from '@mui/icons-material/SkipNext';
+import {AiOutlineInstagram} from 'react-icons/ai';
+import {AiOutlineFacebook,AiOutlineTwitter} from 'react-icons/ai';
 
 
 
@@ -45,7 +34,7 @@ export default function Dashboard() {
         {SideData.map((val, key) => {
           return (
             <li
-              id={window.location.pathname == val.link ? 'active' : ''}
+              id={window.location.pathname === val.link ? 'active' : ''}
               className="row"
               key={key}
               onClick={() => {
@@ -63,62 +52,37 @@ export default function Dashboard() {
       </div>
     </div>
      
-    <div className='profile'>
-      <h3>Name  :  {user.name}</h3>
-      <h5>Email :{user.email}</h5>
-      <h5>Phone :9991375659</h5>
-      <h5>Address :{user.address}</h5>
-      </div>
-    <div className="orders">
-      {console.log(data)}
-      <ul>
-         {/* {
-          data.map((msg)=>(
-            msg.map((msg1)=>(
-              <> */}
-              {/* <div className='profile'>
-                <h3>Himanshu HK</h3>
-                <h5>Type: Seller</h5>
-                <h5>Address:Opp. Dhanush Supermarket,Sri City Chitoor,104636</h5>
-                <h5>Phone: 1234567890</h5>
-                <h5>Email:himanshu.h20@iiits.in</h5>
-                <h5>Rating: 4.5</h5>
-                <h5>Reviews: 100</h5>
-                <h5>Orders: 100</h5>
-                <></>
-                </div> */}
-
-
-      {/* <Card sx={{ display: 'flex' }}>
-      <Box sx={{ display: 'flex', flexDirection: 'column' }}>
-        <CardContent sx={{ flex: '1 0 auto' }}>
-          <Typography component="div" variant="h5">
-            {msg1.name}
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {msg1.amount} Pieces
-          </Typography>
-          <Typography variant="subtitle1" color="text.secondary" component="div">
-            {msg1.price}RS
-          </Typography>
-        </CardContent>
-        <Box sx={{ display: 'flex', alignItems: 'center', pl: 1, pb: 1 }}>
-             dispatched
-        </Box>
-      </Box>
-      <CardMedia
-        component="img"
-        sx={{ width: 150 }}
-        image={msg1.image}
-        alt="hai hi nhi"
-        />
-    </Card> */}
-              {/* </>
-            ))
-          ))
-         } */}
-        </ul>
+    <div className='orders'>
+    <div><h1 className="upperhk">{localStorage.getItem("Name")}</h1>
+    <h4>({localStorage.getItem("Type")})</h4>
     </div>
+     
+     <div className="hk">
+     <div>
+        <img src={localStorage.getItem("ProfilePicUrl")} alt="profile-Pic-Admin" className="imagehk" />
+     </div>
+
+     <div className="divhk">
+     <h3 className="nhk">Details:</h3>
+     <h5 className='uphk'>Email :</h5>
+     <h5 className='downhk'>{localStorage.getItem("Email")}</h5>
+     <h5 className='uphk'>Contact :</h5>
+     <h5 className='downhk'>{localStorage.getItem("Phone")}</h5>
+      
+      <h5 className='uphk'>Address :</h5>
+      <h5 className='downhk'>{localStorage.getItem("Address")}</h5>
+
+      <div className="iconhk">
+      <AiOutlineInstagram size="2.5rem"/>
+      <AiOutlineFacebook size="2.5rem"/>
+      <AiOutlineTwitter size="2.5rem"/>
+      </div>
+     </div>
+
+     </div>
+      
+      </div>
+    
                 
     </div>
   );

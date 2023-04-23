@@ -3,13 +3,12 @@ import { useParams, useHistory } from 'react-router-dom';
 import { useProductsContext } from '../context/products_context';
 import { single_product_url as url } from '../utils/constants';
 import { formatPrice } from '../utils/helpers';
-import { Loading, Error, ProductImages, AddToCart, Stars, PageHero } from '../components';
+import { SignIn, Loading, Error, ProductImages, AddToCart, Stars, PageHero } from '../components';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const SingleProductPage = () => {
   const { id } = useParams();
-  // const history = useHistory();
   const { single_product_loading: loading, single_product_error: error, single_product: product, fetchSingleProduct } = useProductsContext();
 
   
@@ -18,13 +17,26 @@ const SingleProductPage = () => {
     console.log(id);
   }, [id]);
 
-  // useEffect(() => {
-  //   if (error) {
-  //     setTimeout(() => {
-  //       history.push('/');
-  //     }, 3000);
-  //   } 
-  // }, [error]);
+  const history = useHistory();
+  function removeItem(event) {
+    event.preventDefault();
+    // console.log(sku);
+    fetch("http://localhost:3001/remove-item", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ id: sku }),
+    })
+      .then((response) => response.json())
+      .then((resData) => {
+        if(resData.message === "Product has been deleted"){
+          alert("Product removed successfully");
+          history.push('/products');
+        }
+      })
+      .catch((err) => console.log(err));
+  }
 
   if (loading) {
     return <Loading />;
@@ -65,7 +77,20 @@ const SingleProductPage = () => {
                 {company}
               </p>
               <hr />
-              {stock > 0 && <AddToCart product={product} />}
+              
+              { localStorage.getItem("loggedIn") === "true" && localStorage.getItem("Type")==="Buyer" ?  
+                stock > 0 && <AddToCart product={product} />
+                :
+                <button className="submit-btn">
+                  <Link to="/login"> Login to Buy </Link>
+                </button>
+                 
+                }
+                { localStorage.getItem("loggedIn") === "true" && localStorage.getItem("Type")==="Admin"   
+                 && (<button onClick={removeItem} className="submit-btn">
+                  Remove Product 
+                </button>)
+                }
             </section>
           </div>
         </div>
@@ -95,8 +120,29 @@ const Wrapper = styled.main`
     display: grid;
     grid-template-columns: 125px 1fr;
     span {
+      width:100%;
       font-weight: 700;
     }
+  }
+
+  .submit-btn {
+    border-top-right-radius: var(--radius);
+    border-bottom-right-radius: var(--radius);
+  }
+  .submit-btn {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: var(--clr-primary-5);
+    text-transform: capitalize;
+    letter-spacing: var(--spacing);
+    cursor: pointer;
+    transition: var(--transition);
+    color: var(--clr-black);
+  }
+  .submit-btn:hover {
+    color: var(--clr-white);
   }
 
   @media (min-width: 992px) {
