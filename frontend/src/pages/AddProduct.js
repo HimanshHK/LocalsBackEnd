@@ -10,23 +10,30 @@ const AddProduct = () => {
   const [submitted, setSubmitted] = useState(false);
   const handleChange = (event) => {
     const name = event.target.name;
+    if (name === "image") {
+      console.log(name)
+      return setInputs((prevState) => ({ ...prevState, [name]: event.target.files[0] }));
+    }
     const value =
       event.target.name === "price" || event.target.name === "stock"
         ? parseInt(event.target.value)
         : event.target.value;
 
     setInputs((prevState) => ({ ...prevState, [name]: value }));
+    console.log(inputs)
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
+    const formData = new FormData();
+
+    for (const key in inputs) {
+      formData.append(key.toString(), inputs[key]);
+    }
     fetch("http://localhost:3001/product", {
       method: "POST",
-      body: JSON.stringify(inputs),
-      headers: {
-        "Content-Type": "application/json",
-      },
+      body: formData,
     })
       .then((res) => res.json())
       .then((data) => {
@@ -75,7 +82,7 @@ const AddProduct = () => {
               aria-expanded
             />
           </div>
-          <div className="form-item">
+          {/* <div className="form-item">
             <label className="labelid">Image</label>
             <input
               name="image"
@@ -83,7 +90,25 @@ const AddProduct = () => {
               required
               onChange={handleChange}
             />
+          </div> */}
+
+          <div onChange={handleChange} className="field padding-bottom--24">
+          <label>Upload Product Image</label>
+          <input 
+          type="file"
+          name="image" 
+          required
+          
+          />
           </div>
+
+          {/* <div
+            className="field padding-bottom--24"
+            onChange={handleChange}
+          >
+            <label>Upload profile picture</label>
+            <input type="file" name="profile-pic" required />
+          </div> */}
           
           <div className="form-item">
         <label className="labelid">Category</label>

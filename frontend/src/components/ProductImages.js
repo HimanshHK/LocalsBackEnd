@@ -3,13 +3,12 @@ import styled from 'styled-components';
 
 const ProductImages = ({ image}) => {
 
-    console.log(image);
-    return (
-        <Wrapper>
-            <img src={image} alt='main' className='main' />
-
-        </Wrapper>
-    );
+  console.log(image);
+  return (
+      <Wrapper>
+          <img src={(image !=null && image[0]==='u')? 'http://localhost:3001/'+image:image} alt='main' className='main' />
+      </Wrapper>
+  );
 };
 
 const Wrapper = styled.section`

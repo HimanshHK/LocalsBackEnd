@@ -120,6 +120,7 @@ const Wrapper = styled.main`
     display: grid;
     grid-template-columns: 125px 1fr;
     span {
+      width:100%;
       font-weight: 700;
     }
   }

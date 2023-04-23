@@ -87,6 +87,7 @@ export default function Dashboard() {
             <div className="imghk">
               <img
                 src={localStorage.getItem('ProfilePicUrl')}
+               
                 alt="Profile Pic"
                 className="imghk"
               />
